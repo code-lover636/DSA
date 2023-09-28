@@ -43,13 +43,15 @@ int main() {
 /*
 Output:
 Input string: This is a test string
+T=1
 h=1
 i=3
 s=4
-t=3
-o=0
-g=1
-r=1
+ =4
 a=1
-m=0
+t=3
+e=1
+r=1
+n=1
+g=1
 */
