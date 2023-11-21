@@ -27,9 +27,16 @@ int print(struct Node *head){
 
 int main() {
 	struct Node *head = malloc(sizeof(struct Node*));
-	add(head, 1);
-	add(head, 2);
-	add(head, 4);
-	add(head, 9);
+	int n, elem;
+	
+	printf("Enter size of list: ");
+	scanf("%d", &n);
+	
+	for(int i=0; i<n; i++){
+		printf("Enter number: ");
+		scanf("%d", &elem);
+		add(head, elem);
+	}	
+	
 	print(head);
 }
