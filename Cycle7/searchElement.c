@@ -5,49 +5,44 @@ struct Node{
 	int data;
 	struct Node *next;
 };
+struct Node *head = NULL;
 
-
-int add(struct Node *head, int data){
+int add(int data){
 	struct Node *n = head;
 	struct Node *node = malloc(sizeof(struct Node*));
 	node -> data = data;
-	while(n->next != NULL){
-		n = n->next;
+	
+	if(head==NULL){
+		head = node;
 	}
-	n->next = node;
-}
-
-int findSmallest(struct Node *head){
-	int smallest = head->next->data;
-	struct Node *n = head;
-	while(n->next != NULL){
-		n = n->next;
-		if(n->data < smallest){
-			smallest = n->data;
+	else{
+		while(n->next != NULL){
+			n = n->next;
 		}
+		n->next = node;
 	}
-	return smallest;
 }
 
-void search(struct Node *head, int data){
+
+void search(int data){
 	struct Node *n = head;
 	int count = 0;
-	while(n->next != NULL){
-		n = n->next;
+	while(n != NULL){
 		if(n->data==data){
 			printf("%d is present at position %d\n", data, count+1);
 			return;
 		}
+		n = n->next;
 		count++;
 	}
 	printf("%d is not present in list\n", data);
 }
 
-int print(struct Node *head){
+int print(){
 	struct Node *n = head;
-	while(n->next != NULL){
-		n = n->next;
+	while(n != NULL){
 		printf("%d\t", n->data);
+		n = n->next;
 	}
 }
 
@@ -61,12 +56,12 @@ int main() {
 	for(int i=0; i<n; i++){
 		printf("Enter number: ");
 		scanf("%d", &elem);
-		add(head, elem);
+		add(elem);
 	}	
-	print(head);
+	print();
 	printf("\n");
 
 	printf("Enter element to search: ");
 	scanf("%d", &elem);
-	search(head, elem);
+	search(elem);
 }
