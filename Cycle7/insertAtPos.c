@@ -5,44 +5,56 @@ struct Node{
 	int data;
 	struct Node *next;
 };
+struct Node *head = NULL;
 
-
-int add(struct Node *head, int data){
+int add(int data){
 	struct Node *n = head;
 	struct Node *node = malloc(sizeof(struct Node*));
 	node -> data = data;
-	while(n->next != NULL){
-		n = n->next;
+	
+	if(head==NULL){
+		head = node;
 	}
-	n->next = node;
+	else{
+		while(n->next != NULL){
+			n = n->next;
+		}
+		n->next = node;
+	}
 }
 
-void insert(struct Node *head, int data, int pos){
+void insert(int data, int pos){
 	struct Node *n = head;
 	struct Node *node = malloc(sizeof(struct Node*));
 	node -> data = data;
-	while(n->next != NULL){
-		n = n->next;
+	
+	if(!pos){
+		node->next = head;
+		head = node;
+		return;	
+	}
+	
+	while(n != NULL){
 		pos--;
 		if(!pos){
 			node->next = n->next;
 			n->next = node;
 			return;
 		}
+		n = n->next;
 	}
 	n->next = node;
 }
 
-int print(struct Node *head){
+int print(){
 	struct Node *n = head;
-	while(n->next != NULL){
-		n = n->next;
+	while(n != NULL){
 		printf("%d\t", n->data);
+		n = n->next;
 	}
 }
 
 int main() {
-	struct Node *head = malloc(sizeof(struct Node*));
 	int n, elem, pos;
 
 	printf("Enter size of list: ");
@@ -51,17 +63,17 @@ int main() {
 	for(int i=0; i<n; i++){
 		printf("Enter number: ");
 		scanf("%d", &elem);
-		add(head, elem);
+		add(elem);
 	}	
-	print(head);
+	print();
 	printf("\n");
 	
 	printf("Enter position: ");
 	scanf("%d", &pos);
 	printf("Enter data to insert: ");
 	scanf("%d", &elem);
-	insert(head, elem, pos-1);
+	insert(elem, pos-1);
 	
-	print(head);
+	print();
 	printf("\n");
 }
