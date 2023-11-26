@@ -5,20 +5,32 @@ struct Node{
 	int data;
 	struct Node *next;
 };
+struct Node *head = NULL;
 
-
-int add(struct Node *head, int data){
+int add(int data){
 	struct Node *n = head;
 	struct Node *node = malloc(sizeof(struct Node*));
 	node -> data = data;
-	while(n->next != NULL){
-		n = n->next;
+	
+	if(head==NULL){
+		head = node;
 	}
-	n->next = node;
+	else{
+		while(n->next != NULL){
+			n = n->next;
+		}
+		n->next = node;
+	}
 }
 
-void del(struct Node *head, int data){
+void del(int data){
 	struct Node *n = head;
+	
+	if(n->data == data){
+		head = head->next;
+		return;	
+	}
+	
 	while(n->next != NULL){
 		if(n->next->data==data){
 			n->next = n->next->next;
@@ -28,16 +40,16 @@ void del(struct Node *head, int data){
 	}
 }
 
-int print(struct Node *head){
+
+int print(){
 	struct Node *n = head;
-	while(n->next != NULL){
-		n = n->next;
+	while(n != NULL){
 		printf("%d\t", n->data);
+		n = n->next;
 	}
 }
 
 int main() {
-	struct Node *head = malloc(sizeof(struct Node*));
 	int n, elem;
 
 	printf("Enter size of list: ");
@@ -46,15 +58,15 @@ int main() {
 	for(int i=0; i<n; i++){
 		printf("Enter number: ");
 		scanf("%d", &elem);
-		add(head, elem);
+		add(elem);
 	}	
-	print(head);
+	print();
 	printf("\n");
 	
 	printf("Enter data to delete: ");
 	scanf("%d", &elem);
-	del(head, elem);
+	del(elem);
 	
-	print(head);
+	print();
 	printf("\n");
 }
