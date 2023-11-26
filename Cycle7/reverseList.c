@@ -5,32 +5,26 @@ struct Node{
 	int data;
 	struct Node *next;
 };
+struct Node *head = NULL;
 
-
-int add(struct Node *head, int data){
+int add(int data){
 	struct Node *n = head;
 	struct Node *node = malloc(sizeof(struct Node*));
 	node -> data = data;
-	while(n->next != NULL){
-		n = n->next;
+	
+	if(head==NULL){
+		head = node;
 	}
-	n->next = node;
-}
-
-int findSmallest(struct Node *head){
-	int smallest = head->next->data;
-	struct Node *n = head;
-	while(n->next != NULL){
-		n = n->next;
-		if(n->data < smallest){
-			smallest = n->data;
+	else{
+		while(n->next != NULL){
+			n = n->next;
 		}
+		n->next = node;
 	}
-	return smallest;
 }
 
-int reverse(struct Node *head){
-	struct Node *n = head->next;
+int reverse(){
+	struct Node *n = head;
 	struct Node *prev = NULL;
 	struct Node *next = NULL;
 	while(n!= NULL){
@@ -39,21 +33,18 @@ int reverse(struct Node *head){
 		prev = n;
 		n = next;
 	}
-	struct Node *h= malloc(sizeof(struct Node*));
-	h->next = prev;
-	return h;
+	head = prev;
 }
 
-int print(struct Node *head){
+int print(){
 	struct Node *n = head;
-	while(n->next != NULL){
-		n = n->next;
+	while(n != NULL){
 		printf("%d\t", n->data);
+		n = n->next;
 	}
 }
 
 int main() {
-	struct Node *head = malloc(sizeof(struct Node*));
 	int n, elem;
 
 	printf("Enter size of list: ");
@@ -62,13 +53,13 @@ int main() {
 	for(int i=0; i<n; i++){
 		printf("Enter number: ");
 		scanf("%d", &elem);
-		add(head, elem);
+		add(elem);
 	}	
-	print(head);
+	print();
 	printf("\n");
 
-	head = reverse(head);
+	reverse();
 
-	print(head);
+	print();
 	printf("\n");
 }
