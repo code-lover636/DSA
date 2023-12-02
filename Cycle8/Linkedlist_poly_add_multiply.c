@@ -5,7 +5,7 @@ struct Node{
 	int coeff;
 	int exp;
 	struct Node *next;
-} *head1=NULL, *head2=NULL;
+} *head1=NULL, *head2=NULL, *head3=NULL;
 
 void add(){
 	if(head1==NULL && head2==NULL){
@@ -71,13 +71,46 @@ void insert(struct Node **head, int c, int e){
 void print(struct Node **head){
 	struct Node *n = *head;
 	while(n){
-		printf("%dx^%d", n->coeff, n->exp);
-		if(n->next){
-			printf(" + ");
+		if(n->coeff != 0){
+			printf("%dx^%d", n->coeff, n->exp);
+			if(n->next){
+				printf(" + ");
+			}
 		}
 		n=n->next;
 	}
 	printf("\n");
+}
+
+void multiply(){
+	if(head1==NULL && head2==NULL){
+		printf("No terms in polynomials.\n");
+		return;
+	}
+	struct Node *n1 = head1;
+	struct Node *n2 = head2;
+	while(n1 != NULL){
+		n2 = head2;
+		while(n2 != NULL){
+			insert(&(head3), n1->coeff*n2->coeff, n1->exp+n2->exp);
+			n2 = n2->next;
+		}
+		n1 = n1->next;
+	}
+	n1=head3;
+	n2=head3;
+	while(n1 != NULL){
+		n2 = head3;
+		while(n2 != NULL){
+			if(n1->exp==n2->exp && n1!=n2){
+				n1->coeff =  n1->coeff+n2->coeff;
+				n2->coeff = 0;
+			}
+			n2 = n2->next;
+		}
+		n1 = n1->next;
+	}
+	print(&head3);
 }
 
 int main(){
@@ -87,8 +120,9 @@ int main(){
 		printf("1. Insert Term to polynomial1\n");
 		printf("2. Insert Term to polynomial2\n");
 		printf("3. Add polynomials\n");
-		printf("4. Display polynomials\n");
-		printf("5. Exit\n");
+		printf("4. Multiply polynomials\n");
+		printf("5. Display polynomials\n");
+		printf("6. Exit\n");
 		printf("\n\nEnter choice: ");
 		
 		int n = scanf("%d",&choice);
@@ -111,6 +145,9 @@ int main(){
 				add();
 				break;
 			case 4:
+				multiply();
+				break;
+			case 5:
 				print(&(head1));
 				print(&(head2));
 				break;
