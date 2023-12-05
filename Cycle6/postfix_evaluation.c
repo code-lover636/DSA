@@ -39,10 +39,10 @@ void convert(char postexp[], int stack[], int *top){
 			push(stack, n, &(*top));
 		}
 		else{
-            pop(stack, &(*top));
+            		pop(stack, &(*top));
 			pop(stack, &(*top));
-            int ans = compute(stack[(*top)+1], stack[(*top)+2],postexp[i]);
-            push(stack, ans, &(*top));
+            		int ans = compute(stack[(*top)+1], stack[(*top)+2],postexp[i]);
+            		push(stack, ans, &(*top));
 		}
 	}
 }
