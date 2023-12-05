@@ -22,7 +22,7 @@ void convert(char postexp[100], char stack[100][100], int *top){
 			push(stack, postexp[i], &(*top));
 		}
 		else{
-      pop(stack, &(*top));
+      			pop(stack, &(*top));
 			pop(stack, &(*top));
 			char temp[100] = "(";
 			strcat(temp,stack[++(*top)]);
