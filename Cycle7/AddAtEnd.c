@@ -9,7 +9,7 @@ struct Node *head = NULL;
 
 int add(int data){
 	struct Node *n = head;
-	struct Node *node = malloc(sizeof(struct Node*));
+	struct Node *node = malloc(sizeof(struct Node));
 	node -> data = data;
 	
 	if(head==NULL){
