@@ -12,7 +12,6 @@ int main(){
 	int n, val, res=0;
 	printf("Enter the degree of polynomial: ");
 	scanf("%d",&n);
-	
 	int poly[n];
 	
 	
